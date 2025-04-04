@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Recommender-Project.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+15a5e5523a6daf64807fbff827a5d09e0de9c05f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f695b04170f34bd9ed13da9c3c70f1eb855fa605")]
 [assembly: System.Reflection.AssemblyProductAttribute("Recommender-Project.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Recommender-Project.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
