@@ -1,0 +1,6 @@
+@Recommender_Project.API_HostAddress = http://localhost:5207
+
+GET {{Recommender_Project.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
