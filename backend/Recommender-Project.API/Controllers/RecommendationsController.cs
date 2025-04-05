@@ -12,7 +12,6 @@ namespace Recommender_Project.API.Controllers
         private readonly List<CollaborativeRecommendation> _collaborativeRecommendations;
         private readonly List<ContentRecommendation> _contentRecommendations;
 
-        // Both recommendation lists are injected via DI.
         public RecommendationsController(
             List<CollaborativeRecommendation> collaborativeRecommendations,
             List<ContentRecommendation> contentRecommendations)
@@ -21,32 +20,77 @@ namespace Recommender_Project.API.Controllers
             _contentRecommendations = contentRecommendations;
         }
 
-        // Endpoint for collaborative recommendations
+        // GET: api/Recommendations/collaborative
+        [HttpGet("collaborative")]
+        public IActionResult GetAllCollaborativeRecommendations()
+        {
+            var result = _collaborativeRecommendations.Select(r => new
+            {
+                articleId = r.articleId,
+                article = r.article,
+                recommendations = new List<string>
+                {
+                    r.recommendation1,
+                    r.recommendation2,
+                    r.recommendation3,
+                    r.recommendation4,
+                    r.recommendation5
+                }
+            }).ToList();
+
+            return Ok(result);
+        }
+
         // GET: api/Recommendations/collaborative/{articleId}
         [HttpGet("collaborative/{articleId}")]
         public IActionResult GetCollaborativeRecommendations(string articleId)
         {
             var recommendation = _collaborativeRecommendations
-                .FirstOrDefault(r => r.article == articleId);
+                .FirstOrDefault(r => r.articleId == articleId);
 
             if (recommendation == null)
             {
                 return NotFound($"No collaborative recommendations found for article ID: {articleId}");
             }
 
-            var result = new List<string>
+            var result = new
             {
-                recommendation.recommendation1,
-                recommendation.recommendation2,
-                recommendation.recommendation3,
-                recommendation.recommendation4,
-                recommendation.recommendation5
+                articleId = recommendation.articleId,
+                article = recommendation.article,
+                recommendations = new List<string>
+                {
+                    recommendation.recommendation1,
+                    recommendation.recommendation2,
+                    recommendation.recommendation3,
+                    recommendation.recommendation4,
+                    recommendation.recommendation5
+                }
             };
 
             return Ok(result);
         }
 
-        // Endpoint for content recommendations
+        // ✅ This one was missing before
+        // GET: api/Recommendations/content
+        [HttpGet("content")]
+        public IActionResult GetAllContentRecommendations()
+        {
+            var result = _contentRecommendations.Select(r => new
+            {
+                contentId = r.contentId,
+                recommendations = new List<string>
+                {
+                    r.recommendation1,
+                    r.recommendation2,
+                    r.recommendation3,
+                    r.recommendation4,
+                    r.recommendation5
+                }
+            }).ToList();
+
+            return Ok(result);
+        }
+
         // GET: api/Recommendations/content/{contentId}
         [HttpGet("content/{contentId}")]
         public IActionResult GetContentRecommendations(string contentId)
