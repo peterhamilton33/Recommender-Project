@@ -70,6 +70,27 @@ namespace Recommender_Project.API.Controllers
             return Ok(result);
         }
 
+        // ✅ This one was missing before
+        // GET: api/Recommendations/content
+        [HttpGet("content")]
+        public IActionResult GetAllContentRecommendations()
+        {
+            var result = _contentRecommendations.Select(r => new
+            {
+                contentId = r.contentId,
+                recommendations = new List<string>
+                {
+                    r.recommendation1,
+                    r.recommendation2,
+                    r.recommendation3,
+                    r.recommendation4,
+                    r.recommendation5
+                }
+            }).ToList();
+
+            return Ok(result);
+        }
+
         // GET: api/Recommendations/content/{contentId}
         [HttpGet("content/{contentId}")]
         public IActionResult GetContentRecommendations(string contentId)
